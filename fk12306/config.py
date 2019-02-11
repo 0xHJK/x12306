@@ -51,7 +51,8 @@ class Options(metaclass=Singleton):
         # 只看有余票 -r --remaining
         self.remaining = False
 
-        dir = path.abspath(path.join(path.dirname(__file__), ".."))
+        # dir = path.abspath(path.join(path.dirname(__file__), ".."))
+        dir = path.dirname(__file__)
         # 代理文件 --proxies-file （从文件中随机读取代理）
         self.proxies_file = path.join(dir, "data", "proxies.txt")
         # 站点信息文件 --stations-file （从12306下载）

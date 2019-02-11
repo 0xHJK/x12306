@@ -61,6 +61,7 @@ class Glovar(metaclass=Singleton):
 
         if not path.isfile(opts.stations_file):
             # 如果stations文件不存在则终止程序
+            print(opts.stations_file)
             print("Stations file is not exsits.")
             sys.exit(-1)
 
