@@ -230,12 +230,10 @@ class TrainTable:
             "leftTicketDTO.to_station": ts_code,
             "purpose_codes": "ADULT",
         }
-        # print(params)
         # 发送请求
         r = s.get(
-            "https://kyfw.12306.cn/otn/leftTicket/query", params=params, timeout=10
+            "https://kyfw.12306.cn/otn/leftTicket/queryT", params=params, timeout=10
         )
-        # print(r.text)
         j = r.json()
         raws = j["data"]["result"]
         # 处理返回结果
