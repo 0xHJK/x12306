@@ -6,12 +6,10 @@
 
 仅支持Python3，推荐Python3.5+
 
+
 ## 安装
 
-pip安装（推荐）：
-```bash
-pip3 install fk12306
-```
+**安装前修改glovar.py中FAKE_HEADERS的Cookie值，从浏览器中复制即可**
 
 手动安装：
 ```bash

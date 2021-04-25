@@ -26,7 +26,7 @@ class Singleton(type):
 
 class Options(metaclass=Singleton):
     """
-        自定义选项
+    自定义选项
     """
 
     def __init__(self):

@@ -9,6 +9,7 @@
     搜索结果中的班次信息
 """
 
+import time
 import re
 import prettytable as pt
 
@@ -19,7 +20,7 @@ from .utils import code_to_station, station_to_code, colorize
 
 class Train:
     """
-        搜索结果中的班次信息，包括车次号、余票、时间等信息
+    搜索结果中的班次信息，包括车次号、余票、时间等信息
     """
 
     def __init__(self):
@@ -154,7 +155,7 @@ class Train:
 
 class TrainTable:
     """
-        搜索结果列表
+    搜索结果列表
     """
 
     def __init__(self):
@@ -162,7 +163,7 @@ class TrainTable:
 
     def echo(self):
         """
-            对外调用的方法，用来打印查询结果
+        对外调用的方法，用来打印查询结果
         """
         tb = pt.PrettyTable()
         tb.field_names = ["车次", "发车", "出发站", "到达站", "到达", "余票", "历时"]
@@ -230,41 +231,47 @@ class TrainTable:
             "leftTicketDTO.to_station": ts_code,
             "purpose_codes": "ADULT",
         }
-        # 发送请求
-        r = s.get(
-            "https://kyfw.12306.cn/otn/leftTicket/queryT", params=params, timeout=10
-        )
-        j = r.json()
-        raws = j["data"]["result"]
-        # 处理返回结果
-        train_list = []
-        for raw in raws:
-            fields = raw.split("|")
-            # 如果限制了车次，且搜索车次不在目标车次中则丢弃
-            if no_list and fields[3] not in no_list:
-                continue
-            # 如果限制了种类
-            if glovar.gcd:
-                # 只看高铁动车城际
-                if fields[3][0] not in "GCD":
+        try:
+            # 发送请求
+            print(params)
+            r = s.get(
+                "https://kyfw.12306.cn/otn/leftTicket/query", params=params, timeout=10
+            )
+            j = r.json()
+            raws = j["data"]["result"]
+            # 处理返回结果
+            train_list = []
+            for raw in raws:
+                fields = raw.split("|")
+                # 如果限制了车次，且搜索车次不在目标车次中则丢弃
+                if no_list and fields[3] not in no_list:
                     continue
-            elif glovar.ktz:
-                # 只看普通列车
-                if fields[3][0] in "GCD":
-                    continue
+                # 如果限制了种类
+                if glovar.gcd:
+                    # 只看高铁动车城际
+                    if fields[3][0] not in "GCD":
+                        continue
+                elif glovar.ktz:
+                    # 只看普通列车
+                    if fields[3][0] in "GCD":
+                        continue
 
-            train = Train()
-            train.full_no = fields[2]  # 编号全称
-            train.no = fields[3]  # 编号简称
-            train.fs_code = fields[6]
-            train.ts_code = fields[7]
-            train.start_time = fields[8]
-            train.end_time = fields[9]
-            train.duration = fields[10]
-            for i in glovar.seats_idx_list:
-                train.remaining.append(fields[i] or "--")
-            train_list.append(train)
-
+                train = Train()
+                train.full_no = fields[2]  # 编号全称
+                train.no = fields[3]  # 编号简称
+                train.fs_code = fields[6]
+                train.ts_code = fields[7]
+                train.start_time = fields[8]
+                train.end_time = fields[9]
+                train.duration = fields[10]
+                for i in glovar.seats_idx_list:
+                    train.remaining.append(fields[i] or "--")
+                train_list.append(train)
+        except Exception as e:
+            print(e)
+            print(r.text)
+            print(s.headers)
+            train_list = []
         return train_list
 
     def _query_trains_zmode(self, fs_code, ts_code, date, no_list) -> list:
@@ -288,8 +295,8 @@ class TrainTable:
                     stations_dict[station[0]].append(train.no)
                 else:
                     stations_dict[station[0]] = [train.no]
-
         for station, trains in stations_dict.items():
+            time.sleep(1)
             trains_list += self._query_trains_basic(fs_code, station, date, trains)
 
         return trains_list

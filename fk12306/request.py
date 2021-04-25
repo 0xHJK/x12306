@@ -14,7 +14,7 @@ from .glovar import Glovar, FAKE_HEADERS
 
 class Request:
     """
-        封装requests
+    封装requests
     """
 
     def get_available_proxy(self) -> str:

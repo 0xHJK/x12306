@@ -44,8 +44,8 @@ def main(
     cdn_file,
 ):
     """
-        12306查票助手
-        Example：fk12306 -f 上海 -t 北京 -d "2019-03-01" -n "G16 G18 G22" -r
+    12306查票助手
+    Example：fk12306 -f 上海 -t 北京 -d "2019-03-01" -n "G16 G18 G22" -r
     """
     opts = Options()
     opts.fs = from_station
