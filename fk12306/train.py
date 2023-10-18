@@ -13,7 +13,7 @@ import time
 import re
 import prettytable as pt
 
-from .glovar import Glovar
+from .glovar import Glovar, QUERY_URL
 from .request import Request
 from .utils import code_to_station, station_to_code, colorize
 
@@ -235,7 +235,7 @@ class TrainTable:
             # 发送请求
             print(params)
             r = s.get(
-                "https://kyfw.12306.cn/otn/leftTicket/query", params=params, timeout=10
+                QUERY_URL, params=params, timeout=10
             )
             j = r.json()
             raws = j["data"]["result"]
