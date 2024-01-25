@@ -287,16 +287,19 @@ class TrainTable:
         # stations_set = set()
         stations_dict = {}
         trains_list = self._query_trains_basic(fs_code, ts_code, date, no_list)
-        for train in trains_list:
-            train.update_stations()
-            for station in train.stations[1:-1]:  # 除了出发站和目标站本身
-                # stations_set.add(station[0])
-                if station[0] in stations_dict:
-                    stations_dict[station[0]].append(train.no)
-                else:
-                    stations_dict[station[0]] = [train.no]
-        for station, trains in stations_dict.items():
-            time.sleep(1)
-            trains_list += self._query_trains_basic(fs_code, station, date, trains)
-
-        return trains_list
+        try:
+            for train in trains_list:
+                train.update_stations()
+                for station in train.stations[1:-1]:  # 除了出发站和目标站本身
+                    # stations_set.add(station[0])
+                    if station[0] in stations_dict:
+                        stations_dict[station[0]].append(train.no)
+                    else:
+                        stations_dict[station[0]] = [train.no]
+            for station, trains in stations_dict.items():
+                time.sleep(1)
+                trains_list += self._query_trains_basic(fs_code, station, date, trains)
+        except Exception as e:
+            print(e)
+        finally:
+            return trains_list
