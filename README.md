@@ -22,6 +22,11 @@
 
 ## 安装运行
 
+pip安装
+```bash
+pip install x12306
+```
+
 手动安装：
 ```bash
 git clone https://github.com/0xHJK/x12306

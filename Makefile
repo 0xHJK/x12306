@@ -8,7 +8,7 @@ install:
 	python3 setup.py install
 
 publish:
-	pip3 install 'twine>=1.5.0'
-	python3 setup.py sdist bdist_wheel
+	pip install 'twine>=1.5.0'
+	python setup.py sdist bdist_wheel
 	twine upload dist/*
 	rm -fr build .egg requests.egg-info
