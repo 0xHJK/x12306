@@ -1,8 +1,8 @@
-# fk12306
+# x12306
 
-12306查票助手，一键查询沿途所有站点，先上车后补票，暂不支持抢票
+12306查票助手，主要功能是可以一键查询沿途所有站点，当全程票售罄的时候，方便查询中间站点余票，先上车后补票。
 
-`fk`的意思是`Find and checK`，也就是`F*** *** ****K`，缩写为`fk`
+工具仅用于查询余票，不支持购票，建议在12306官方平台购票。
 
 仅支持Python3，推荐Python3.5+
 
@@ -13,24 +13,24 @@
 
 手动安装：
 ```bash
-git clone https://github.com/0xHJK/fk12306
-cd fk12306 && make install
+git clone https://github.com/0xHJK/x12306
+cd x12306 && make install
 ```
 
 不安装直接运行：
 ```bash
-git clone https://github.com/0xHJK/fk12306
-cd fk12306
-python3 fk12306.py
+git clone https://github.com/0xHJK/x12306
+cd x12306
+python3 x12306.py
 ```
 
 ## 使用方法
 
 ```
-$ fk12306 --help
-Usage: fk12306 [OPTIONS]
+$ x12306 --help
+Usage: x12306 [OPTIONS]
 
-  12306查票助手 Example：fk12306 -f 上海 -t 北京 -d "2019-03-01" -n "G16 G18 G22" -r
+  12306查票助手 Example：x12306 -f 上海 -t 北京 -d "2019-03-01" -n "G16 G18 G22" -r
 
 Options:
   --version                Show the version and exit.
@@ -52,7 +52,7 @@ Options:
 
 ## 使用示例
 
-![](https://github.com/0xHJK/fk12306/raw/master/docs/preview.png)
+![](https://github.com/0xHJK/x12306/raw/master/docs/preview.png)
 
 ## LICENSE
-[MIT License](https://github.com/0xHJK/fk12306/blob/master/LICENSE)
+[MIT License](https://github.com/0xHJK/x12306/blob/master/LICENSE)

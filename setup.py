@@ -19,7 +19,7 @@ if sys.argv[-1] == "publish":
 
 here = os.path.abspath(os.path.dirname(__file__))
 about = {}
-with open(os.path.join(here, "fk12306", "__version__.py"), "r", encoding="utf-8") as f:
+with open(os.path.join(here, "x12306", "__version__.py"), "r", encoding="utf-8") as f:
     exec(f.read(), about)
 
 with open("README.md", "r", encoding="utf-8") as fh:
@@ -36,12 +36,12 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     packages=setuptools.find_packages(),
-    # package_data={'fk12306': ['data']},
+    # package_data={'x12306': ['data']},
     include_package_data=True,
     test_suite="tests",
     entry_points={
         "console_scripts": [
-            "fk12306 = fk12306.__init__:main",
+            "x12306 = x12306.__init__:main",
         ],
     },
     install_requires=[
