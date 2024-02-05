@@ -24,7 +24,7 @@ FAKE_HEADERS = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) "
     "Chrome/72.0.3626.96 Safari/537.36",
     "X-Requested-With": "XMLHttpRequest",
-    "Cookie": "JSESSIONID=A7447A22EC111158D762DCE0F5BEA669",
+    "Cookie": "JSESSIONID=EC32F522D4074D3FAC9783DDDBFF0CFA",
 }
 
 SEAT_TYPES = {
@@ -42,7 +42,7 @@ SEAT_TYPES = {
     "其他": 22,
 }
 
-QUERY_URL = "https://kyfw.12306.cn/otn/leftTicket/query"
+QUERY_URL = "https://kyfw.12306.cn/otn/leftTicket/queryE"
 
 class Singleton(type):
     _instances = {}
