@@ -44,8 +44,11 @@ def main(
     cdn_file,
 ):
     """
-    12306查票助手
-    Example：x12306 -f 上海 -t 北京 -d "2019-03-01" -n "G16 G18 G22" -r
+    12306查票助手 https://github.com/0xHJK/x12306
+
+    Example：python x12306.py -f 上海 -t 北京 -d "2019-03-01" -n "G16 G18 G22" -r
+
+    如果查询失败的话，请修改glovar.py中的QUERY_URL和JSESSIONID
     """
     opts = Options()
     opts.fs = from_station

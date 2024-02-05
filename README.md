@@ -6,10 +6,19 @@
 
 仅支持Python3，推荐Python3.5+
 
+**使用前需要修改`glovar.py`中的`QUERY_URL`和`JSESSIONID`**
+
+## 获取QUERY_URL和JSESSIONID
+
+1. 打开浏览器，访问 https://www.12306.cn/index/
+2. 随便查询一个车次，如上海 > 北京
+3. 按F12（或CMD+Option+I）打开浏览器控制台，打开网络（Network）选项卡
+4. 找到查询车次的请求，如果没找到，可以再点一下查询
+5. 在`glovar.py`中修改`QUERY_URL`和`JSESSIONID`
+
+![./docs/query.jpg]
 
 ## 安装
-
-**安装前修改glovar.py中FAKE_HEADERS的Cookie值，从浏览器中复制即可**
 
 手动安装：
 ```bash

@@ -12,6 +12,12 @@ from os import path
 
 from .config import Options
 
+# URL和JSESSIONID经常会变化，需要修改
+# 12306查询URL，从浏览器抓包可得，最后的字母可能是A-Z
+QUERY_URL = "https://kyfw.12306.cn/otn/leftTicket/queryE"
+# JSESSIONID
+JSESSIONID = "EC32F522D4074D3FAC9783DDDBFF0CFA"
+
 # 大写配置无特殊情况不建议修改
 FAKE_HEADERS = {
     "Accept": "*/*",
@@ -24,7 +30,7 @@ FAKE_HEADERS = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) "
     "Chrome/72.0.3626.96 Safari/537.36",
     "X-Requested-With": "XMLHttpRequest",
-    "Cookie": "JSESSIONID=EC32F522D4074D3FAC9783DDDBFF0CFA",
+    "Cookie": "JSESSIONID=" + JSESSIONID,
 }
 
 SEAT_TYPES = {
@@ -41,8 +47,6 @@ SEAT_TYPES = {
     "无座": 26,
     "其他": 22,
 }
-
-QUERY_URL = "https://kyfw.12306.cn/otn/leftTicket/queryE"
 
 class Singleton(type):
     _instances = {}
