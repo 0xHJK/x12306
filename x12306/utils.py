@@ -7,19 +7,6 @@
 """
 
 import platform
-from .glovar import Glovar
-
-
-def station_to_code(name):
-    for s in Glovar().total_stations:
-        if name == s[1]:
-            return s[0]
-
-
-def code_to_station(code):
-    for s in Glovar().total_stations:
-        if code == s[0]:
-            return s[1]
 
 
 def colorize(s, color):
