@@ -63,6 +63,9 @@ class Train:
             and self._fs == other._fs
             and self._ts == other._ts
         )
+    
+    def __hash__(self) -> int:
+        return hash((self.full_no, self._fs, self._ts))
 
     def __lt__(self, other):
         """根据车次号排序"""
@@ -296,4 +299,4 @@ class TrainTable:
                     fs_code, ts_code, date, trains_no_list
                 )
 
-        return trains_list
+        return list(set(trains_list))
