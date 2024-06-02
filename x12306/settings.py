@@ -144,7 +144,8 @@ class Settings(metaclass=Singleton):
 
     @property
     def trains_no_list(self):
-        return self.trains_no.split()
+        separators = "[,; ]"  # comma, semicolon, and space
+        return re.split(separators, self.trains_no.upper())
 
     @property
     def seats_list(self):
