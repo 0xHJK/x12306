@@ -190,11 +190,15 @@ class TrainTable:
         """
         s = self.session
         # print("查询中...", " ".join([v for v in params.values()]))
-        if settings.verbose:
-            print(url, params)
+
         try:
             r = s.get(url, params=params, timeout=settings.timeout)
             j = r.json()
+            if settings.verbose:
+                print(url, params)
+                print('\n[REQUEST HEADERS]', s.headers)
+                print('\n[RESPONSE HEADERS]', r.headers)
+                print('\n[RESPONSE TEXT]', r.text)
         except Exception as e:
             print(colorize("第 %i 查询失败" % retries, "red"), e)
             print(url, params)
