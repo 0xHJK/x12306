@@ -35,7 +35,7 @@ setuptools.setup(
     license=about["__license__"],
     long_description=long_description,
     long_description_content_type="text/markdown",
-    packages=setuptools.find_packages(),
+    packages=setuptools.find_namespace_packages(),
     # package_data={'x12306': ['data']},
     include_package_data=True,
     test_suite="tests",

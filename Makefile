@@ -5,10 +5,10 @@ clean:
 	find . | grep .pyc | xargs rm -f
 
 install:
-	python3 setup.py install
+	pip install .
 
 publish:
 	pip install 'twine>=1.5.0'
 	python setup.py sdist bdist_wheel
-	twine upload dist/*
+	twine upload dist/*.whl dist/*.tar.gz
 	rm -fr build .egg requests.egg-info
