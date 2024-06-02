@@ -17,6 +17,7 @@ import hashlib
 import secrets
 import requests
 from os import path
+from fake_useragent import UserAgent
 
 # 默认配置
 SEAT_TYPES = {
@@ -41,8 +42,7 @@ DEFAULT_HEADERS = {
     "Connection": "keep-alive",
     "Host": "kyfw.12306.cn",
     "Referer": "https://kyfw.12306.cn/otn/leftTicket/init",
-    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) "
-    "Chrome/72.0.3626.96 Safari/537.36",
+    "User-Agent": UserAgent().random,
     "X-Requested-With": "XMLHttpRequest",
     "Cookie": "JSESSIONID=" + hashlib.md5(secrets.token_bytes(16)).hexdigest().upper(),
 }
@@ -144,8 +144,11 @@ class Settings(metaclass=Singleton):
 
     @property
     def trains_no_list(self):
-        separators = "[,; ]"  # comma, semicolon, and space
-        return re.split(separators, self.trains_no.upper())
+        if self.trains_no:
+            separators = "[,; ]"  # comma, semicolon, and space
+            return re.split(separators, self.trains_no.upper())
+        else:
+            return []
 
     @property
     def seats_list(self):
