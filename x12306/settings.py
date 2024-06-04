@@ -42,7 +42,7 @@ DEFAULT_HEADERS = {
     "Connection": "keep-alive",
     "Host": "kyfw.12306.cn",
     "Referer": "https://kyfw.12306.cn/otn/leftTicket/init",
-    "User-Agent": "Mozilla/5.0 (Windows NT 4.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/34.0.804.0 Safari/535.1",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36",
     "X-Requested-With": "XMLHttpRequest",
     "Cookie": "JSESSIONID=" + hashlib.md5(secrets.token_bytes(16)).hexdigest().upper(),
 }
