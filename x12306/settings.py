@@ -17,7 +17,7 @@ import hashlib
 import secrets
 import requests
 from os import path
-from fake_useragent import UserAgent
+# from fake_useragent import UserAgent
 
 # 默认配置
 SEAT_TYPES = {
@@ -42,7 +42,7 @@ DEFAULT_HEADERS = {
     "Connection": "keep-alive",
     "Host": "kyfw.12306.cn",
     "Referer": "https://kyfw.12306.cn/otn/leftTicket/init",
-    "User-Agent": UserAgent().random,
+    "User-Agent": "Mozilla/5.0 (Windows NT 4.0) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/34.0.804.0 Safari/535.1",
     "X-Requested-With": "XMLHttpRequest",
     "Cookie": "JSESSIONID=" + hashlib.md5(secrets.token_bytes(16)).hexdigest().upper(),
 }
