@@ -102,6 +102,8 @@ class Settings(metaclass=Singleton):
         self.stations_file = DEFAULT_STATIONS_FILE
         # CDN文件 --cdn-file
         self.cdn_file = DEFAULT_CDN_FILE
+        # CDN文件 --csv-file
+        self.csv_file = None
 
         self.headers = DEFAULT_HEADERS
         self.init_url = DEFAULT_BASE_URL + "/init"

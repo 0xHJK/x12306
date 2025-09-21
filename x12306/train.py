@@ -13,6 +13,7 @@ import time
 import re
 import requests
 import prettytable as pt
+import csv
 
 from .settings import settings
 from .utils import colorize
@@ -148,6 +149,13 @@ class TrainTable:
         for train in self.trains_list:
             tb.add_row(train.row)
         print(tb)
+        if settings.csv_file:  
+            with open(settings.csv_file, mode='w+', encoding='utf-8', newline='') as file:
+                csv_writer = csv.writer(file)
+                for train in self.trains_list:
+                    csv_writer.writerow(train.row)
+            print("已写入",settings.csv_file)
+
 
     def cleanup(self):
         """处理trains_list，排序和删除无效数据"""
@@ -167,6 +175,13 @@ class TrainTable:
         """
         if settings.zmode:
             self.trains_list = self._query_trains_zmode(
+                settings.fs_code,
+                settings.ts_code,
+                settings.date,
+                settings.trains_no_list,
+            )
+        elif settings.zzmode:
+            self.trains_list = self._query_trains_zzmode(
                 settings.fs_code,
                 settings.ts_code,
                 settings.date,
@@ -301,6 +316,31 @@ class TrainTable:
             if ts_code:
                 trains_list += self._query_trains(
                     fs_code, ts_code, date, trains_no_list
+                )
+
+        return list(set(trains_list))
+    def _query_trains_zzmode(self, fs_code, ts_code, date, trains_no_list) -> list:
+        """
+            高级查询模式，会查询从出发站到沿途所有站的车次情况
+            仅被内部调用，调用前处理好参数
+        :param fs_code: 出发地编码
+        :param ts_code: 目的地编码
+        :param date: 日期
+        :param trains_no_list: 限制车次
+        :return: Train对象列表
+        """
+        trains_list = self._query_trains(fs_code, ts_code, date, trains_no_list)
+        trains_no_list = [train.no for train in trains_list]
+        stations_list = []
+
+        for train in trains_list:
+            stations_list += self._query_stations(train)
+        stations_list = list(set(stations_list))
+        for station in stations_list:
+            nfs_code = settings.stations_dict.get(station, "")
+            if ts_code:
+                trains_list += self._query_trains_zmode(
+                    nfs_code, ts_code, date, trains_no_list
                 )
 
         return list(set(trains_list))

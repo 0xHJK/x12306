@@ -5,7 +5,6 @@
 @file: __init__.py
 @time: 2019-02-08
 """
-
 import click
 
 from .settings import settings
@@ -28,6 +27,7 @@ from .train import TrainTable
 @click.option("--proxies-file", help="代理列表文件")
 @click.option("--stations-file", help="站点信息文件")
 @click.option("--cdn-file", help="CDN文件")
+@click.option("--csv-file", help="保存为csv文件")
 def main(
     from_station,
     to_station,
@@ -43,6 +43,7 @@ def main(
     proxies_file,
     stations_file,
     cdn_file,
+    csv_file
 ):
     """
     12306查票助手 https://github.com/0xHJK/x12306
@@ -64,6 +65,7 @@ def main(
         proxies_file=proxies_file,
         stations_file=stations_file,
         cdn_file=cdn_file,
+        csv_file=csv_file
     )
 
     print("\n-----------------------")
